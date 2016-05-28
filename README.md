@@ -40,11 +40,9 @@ require 'capistrano/decompose
 
 you can specify the following options in you `deploy.rb` script or the environment specific deploy file:
 
-``` ruby
-decompose_restart: an array of services that should be restarted each deployment, if not specified decompose will restart all services
-decompose_web_service: the web service that will be used to execute commands inside like `rake` or any interactive command from `decompose:run`, default value: :web
-decompose_rake_tasks: a set of rake tasks to execute after each deploy, default value is `nil`
-```
+* **decompose_restart**: an array of services that should be restarted each deployment, if not specified decompose will restart all services
+* **decompose_web_service**: the web service that will be used to execute commands inside like `rake` or any interactive command from `decompose:run`, default value: :web
+* **decompose_rake_tasks**: a set of rake tasks to execute after each deploy, default value is `nil`
 
 for a typical rails application the previous options should be as follows, given that the application container service name is `web`:
 
