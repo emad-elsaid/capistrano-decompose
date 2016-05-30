@@ -52,6 +52,19 @@ set :decompose_web_service, :web
 set :docker_rake_tasks, ['db:migrate', 'assets:precompile']
 ```
 
+## Defined Tasks
+
+```
+decompose:build                # build docker-compose services
+decompose:clean                # delete docker images that are not related to current build
+decompose:db_setup             # execute rake db:setup inside the web container
+decompose:down                 # shutdown all project services with docker-compose
+decompose:rake_tasks           # execute a set of rake tasts inside the web container
+decompose:restart              # restart services of docker-compose and if not services listed restart all services
+decompose:run                  # run an interactive command inside the web container
+decompose:up                   # boot up all docker-compose services
+```
+
 ## after the first deployment of a rails application
 
 you would need to setup your database by invoking the `db:setup` task to create and seed your database, you can do that using 2 ways
