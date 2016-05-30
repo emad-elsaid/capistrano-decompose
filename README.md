@@ -57,7 +57,6 @@ set :docker_rake_tasks, ['db:migrate', 'assets:precompile']
 ```
 decompose:build                # build docker-compose services
 decompose:clean                # delete docker images that are not related to current build
-decompose:db_setup             # execute rake db:setup inside the web container
 decompose:down                 # shutdown all project services with docker-compose
 decompose:rake_tasks           # execute a set of rake tasts inside the web container
 decompose:restart              # restart services of docker-compose and if not services listed restart all services
@@ -67,12 +66,11 @@ decompose:up                   # boot up all docker-compose services
 
 ## after the first deployment of a rails application
 
-you would need to setup your database by invoking the `db:setup` task to create and seed your database, you can do that using 2 ways
+you would need to setup your database by invoking the `db:setup` task to create and seed your database:
 
-* `cap production decompose:db_setup`
 * `cap production decompose:run rake db:setup`
 
 ## General note
 
-* this gem doesn't provide a `dockerfile` or `docker-compose.yml` file, you have to create these files yourself
+* this gem doesn't provide a `dockerfile` nor `docker-compose.yml` file, you have to create these files yourself
 * the linked directories and files will not work and you should use docker data volumes anyway

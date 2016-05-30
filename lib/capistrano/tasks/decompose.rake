@@ -62,15 +62,6 @@ namespace :decompose do
     end
   end
 
-  desc 'execute rake db:setup inside the web container'
-  task :db_setup do
-    on roles(:app) do
-      within release_path do
-        docker_rake('db:setup')
-      end
-    end
-  end
-
   desc 'run an interactive command inside the web container'
   task :run do
     on roles(:app) do |host|
