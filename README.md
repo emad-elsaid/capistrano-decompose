@@ -1,5 +1,7 @@
 # Capistrano::Decompose
 
+[![Gem Version](https://badge.fury.io/rb/capistrano-decompose.svg)](https://badge.fury.io/rb/capistrano-decompose)
+
 Add tasks for capistrano to deploy with docker-compose.
 
 ## How it works
