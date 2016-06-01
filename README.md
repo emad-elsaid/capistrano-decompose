@@ -51,7 +51,7 @@ For a typical rails application the previous options should be as follows, given
 ```ruby
 set :decompose_restart, [:web]
 set :decompose_web_service, :web
-set :docker_rake_tasks, ['db:migrate', 'assets:precompile']
+set :decompose_rake_tasks, ['db:migrate', 'assets:precompile']
 ```
 
 ## Defined Tasks
