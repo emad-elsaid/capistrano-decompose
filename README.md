@@ -4,6 +4,11 @@
 
 Add tasks for capistrano to deploy with docker-compose.
 
+## Why?
+
+when I was working on my project [Who is popular today](https://www.whoispopulartoday.com) I had that problem that I have a VPS server and I need to isolate each of my apps to a separate environment so the solutions are pretty limited in here, it's Docker or LXC,
+I choose Docker and Docker-Compose as it's easier to get a set of disposable environments up and running in no time and link them to the host data directories which is what I needed, but there where not any kind of integeration with Capistrano to roll out new versions, so here is Capistrano-Decompose a Docker-Compose integeration with capistrano, I hope it solves your problem as it did to mine.
+
 ## How it works
 
 After capistrano pull your repo and link it to the `current` directory, decompose will invoke `docker-compose build` to build your images and then run some rake tasks that you configured in your deployment with the key `decompose_rake_tasks`, you can add your rails tasks like `db:migration`, `assets:precompile`...etc here, then it will invoke `docker-compose up` or restart only the web service you specified in key `decompose_restart`, also you can use `cap <env> decompose:run` to run any command inside a service, so anytime you need to invoke `rails console` inside you docker image on your server you can use `cap production decompose:run rails console`.
