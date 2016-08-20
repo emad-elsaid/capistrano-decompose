@@ -48,7 +48,7 @@ namespace :decompose do
     on roles(:app) do
       within release_path do
         images_to_delete = capture('docker images -f "dangling=true" -q')
-        execute 'docker rmi $(docker images -f "dangling=true" -q)' unless images_to_delete.empty?
+        execute 'docker rmi -f $(docker images -f "dangling=true" -q)' unless images_to_delete.empty?
       end
     end
   end
