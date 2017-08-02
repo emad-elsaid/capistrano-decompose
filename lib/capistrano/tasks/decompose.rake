@@ -78,20 +78,26 @@ namespace :decompose do
     end
   end
 
-  def docker_rake(*args)
-    docker_execute('run', '--rm', fetch(:decompose_web_service), 'rake', *args)
-  end
-
   def docker_execute(*args)
+  compose_file = fetch(:compose_file)
+  unless compose_file.nil? || compose_file.empty?
+     execute('docker-compose', "--project-name #{fetch :application} -f #{compose_file}", *args)
+  else
     execute('docker-compose', "--project-name #{fetch :application}", *args)
   end
+end
 
-  def docker_execute_interactively(host, command)
-    user = host.user
-    port = fetch(:port) || 22
+def docker_execute_interactively(host, command)
+  user = host.user
+  port = fetch(:port) || 22
+  compose_file = fetch(:compose_file)
+  unless compose_file.nil? || compose_file.empty?
+    docker_run = "docker-compose --project-name #{fetch :application}  -f #{compose_file} run --rm web #{command}"
+  else
     docker_run = "docker-compose --project-name #{fetch :application} run --rm web #{command}"
-    exec "ssh -l #{user} #{host} -p #{port} -t 'cd #{deploy_to}/current && #{docker_run}'"
   end
+  exec "ssh -l #{user} #{host} -p #{port} -t 'cd #{deploy_to}/current && #{docker_run}'"
+end
 
   after 'deploy:updated', 'decompose:build'
   after 'deploy:published', 'decompose:rake_tasks'

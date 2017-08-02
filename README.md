@@ -57,6 +57,7 @@ For a typical rails application the previous options should be as follows, given
 set :decompose_restart, [:web]
 set :decompose_web_service, :web
 set :decompose_rake_tasks, ['db:migrate', 'assets:precompile']
+set :compose_file, "docker-compose file name"
 ```
 
 ## Defined Tasks
