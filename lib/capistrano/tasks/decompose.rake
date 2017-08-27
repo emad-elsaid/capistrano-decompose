@@ -80,8 +80,8 @@ namespace :decompose do
     end
   end
 
-  def docker_rake(*args)		
-    docker_execute('run', '--rm', fetch(:decompose_web_service), 'rake', *args)		
+  def docker_rake(*args)
+    docker_execute('run', '--rm', fetch(:decompose_web_service), 'rake', *args)
   end
 
   def docker_execute(*args)
