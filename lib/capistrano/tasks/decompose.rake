@@ -34,7 +34,7 @@ namespace :decompose do
         services = Array(fetch(:decompose_restart))
         if services.empty?
           docker_execute :down
-          docker_execute :up
+          docker_execute :up, '-d'
         else
           docker_execute :stop, *services
           docker_execute :up, '-d', *services
