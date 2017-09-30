@@ -9,6 +9,15 @@ namespace :decompose do
     end
   end
 
+  desc 'pull all docker-compose images'
+  task :up do
+    on roles(:app) do
+      within release_path do
+        docker_execute :pull
+      end
+    end
+  end
+  
   desc 'shutdown all project services with docker-compose'
   task :down do
     on roles(:app) do
