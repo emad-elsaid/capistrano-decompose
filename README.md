@@ -49,7 +49,7 @@ You can specify the following options in you `deploy.rb` script or the environme
 
 * **decompose_restart**: An array of services that should be restarted each deployment, if not specified decompose will restart all services
 * **decompose_web_service**: The web service that will be used to execute commands inside like `rake` or any interactive command from `decompose:run`, default value: :web
-* **decompose_rake_tasks**: A set of rake tasks to execute after each deploy, default value is `nil`
+* **decompose_rake_tasks**: An array of rake tasks to execute after each deploy on the web_service or a Hash of `service_name => [task1, task2...]`, default value is `nil`
 
 For a typical rails application the previous options should be as follows, given that the application container service name is `web`:
 

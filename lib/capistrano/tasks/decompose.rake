@@ -57,7 +57,14 @@ namespace :decompose do
   task :rake_tasks do
     on roles(:app) do
       within release_path do
-        docker_rake(*fetch(:decompose_rake_tasks)) if fetch(:decompose_rake_tasks)
+        case fetch(:decompose_rake_tasks)
+        when Array
+          docker_rake_in_web_service(*fetch(:decompose_rake_tasks))
+        when Hash
+          fetch(:decompose_rake_tasks).each do |service, tasks|
+            docker_rake(service, *tasks)
+          end
+        end
       end
     end
   end
@@ -80,8 +87,12 @@ namespace :decompose do
     end
   end
 
-  def docker_rake(*args)
-    docker_execute('run', '--rm', fetch(:decompose_web_service), 'rake', *args)
+  def docker_rake_in_web_service(*args)
+    docker_execute(fetch(:decompose_web_service), *args)
+  end
+
+  def docker_rake(container, *args)
+    docker_execute('run', '--rm', container, 'rake', *args)
   end
 
   def docker_execute(*args)
